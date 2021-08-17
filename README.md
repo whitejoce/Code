@@ -1,6 +1,6 @@
 # Code
 
-* 声明：本代码仓库采用MIT许可协议（[The MIT License](https://github.com/whitejoce/Easy_Install/blob/main/LICENSE)）
+* 声明：本代码仓库采用MIT许可协议（[The MIT License](https://github.com/whitejoce/Code/blob/main/LICENSE)）
 
 * 这里上传自己平常使用的小工具
 
