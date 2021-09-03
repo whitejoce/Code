@@ -110,11 +110,13 @@
    * Spider_Framework.py
    
      > 提供基础爬虫框架代码
+   
+   
+   * * *
        
-       
-  # Encoder
+   # Encoder
 
-  * encoder.py
+   * encoder.py
  
       <p align="left">
          <a href="https://docs.python.org/3/download.html">
@@ -122,17 +124,17 @@
            </a>
       </p>
     
-     > 此脚本用于处理编码，文字字符格式化问题
-     > 均采用Python自带库
+      > 此脚本用于处理编码，文字字符格式化问题
+      > 均采用Python自带库
 
 
-   *   使用方法:
+    *   使用方法:
 
        `~$: python encoder.py -h`
 
        `~$: python encoder.py -f 1.txt --rob13`
      
-       [./]选项:
+      [./]选项:
           -h, --help    使用帮助
           -f, --file    导入路径文件内容
           -d, --delete  去除文字中指定字符
