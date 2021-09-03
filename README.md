@@ -8,7 +8,7 @@
   
   2.[Software_Install.sh](https://github.com/whitejoce/Code#software_intsall)
   
-  3.[encoder.py](https://github.com/whitejoce/encoder):链接到其他仓库
+  3.[encoder.py](https://github.com/whitejoce/Code#Encoder)
  
   4.[format.py](https://github.com/whitejoce/Code#format)
 
@@ -111,3 +111,31 @@
    
      > 提供基础爬虫框架代码
        
+       
+  # Encoder
+
+  * encoder.py
+ 
+      <p align="left">
+         <a href="https://docs.python.org/3/download.html">
+             <img src="https://img.shields.io/badge/Python-3.x-green.svg">
+           </a>
+      </p>
+    
+     > 此脚本用于处理编码，文字字符格式化问题
+     > 均采用Python自带库
+
+
+   *   使用方法:
+
+       `~$: python encoder.py -h`
+
+       `~$: python encoder.py -f 1.txt --rob13`
+     
+       [./]选项:
+          -h, --help    使用帮助
+          -f, --file    导入路径文件内容
+          -d, --delete  去除文字中指定字符
+          --rob13       Rob13解码
+
+
