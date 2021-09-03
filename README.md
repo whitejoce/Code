@@ -135,9 +135,13 @@
        `~$: python encoder.py -f 1.txt --rob13`
      
       [./]选项:
+      
           -h, --help    使用帮助
+          
           -f, --file    导入路径文件内容
+          
           -d, --delete  去除文字中指定字符
+          
           --rob13       Rob13解码
 
 
