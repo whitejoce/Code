@@ -73,7 +73,9 @@
    >MITM WPA攻击工具：[fluxion](https://github.com/FluxionNetwork/fluxion)
    >
    >审计无线网络工具：[airgeddon](https://github.com/v1s1t0r1sh3r3/airgeddon)
-
+   >
+   >USB取证工具: [usbrip](https://github.com/snovvcrash/usbrip)
+   
    后续更新！
    
    * * *
