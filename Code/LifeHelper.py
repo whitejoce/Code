@@ -124,20 +124,25 @@ def main():
                 #print(html)
                 wea_list_all= html.split("var")
                 #print(wea_list_all)
-
+                temp_port = "http://d1.weather.com.cn/dingzhi/"+City_code+".html?_="+timestamp
+                temp_html=get_weaPage(temp_port,headers1)
+                #print(temp_html)
+                
                 #cityDZ
                 #-----------------------------------------------------
                 html1= wea_list_all[1]
                 wea_list1= html1.split(",")
+                temp_list=temp_html.split(",")
 
+                #print(temp_list)
                 #城市英文
                 city_en = wea_list1[1]
                 city_en = GetItem(city_en,"cityname")
                 #温度区间
-                maxtemp = wea_list1[2]
+                maxtemp = temp_list[3]
                 maxtemp = GetItem(maxtemp,"temp")
 
-                mintemp = wea_list1[3]
+                mintemp = temp_list[4]
                 mintemp = GetItem(mintemp,"tempn")
                 #实时天气
                 wea_now = wea_list1[4]
@@ -212,7 +217,7 @@ def main():
                 print(" 定位城市:  "+cityname)
                 print(" 实时天气:  "+wea_now)
                 print(" 实时温度:  "+temp_now+"℃")
-                print(" 温度区间:  "+maxtemp+"℃ - "+mintemp+"℃")
+                print(" 温度区间:  "+maxtemp+" - "+mintemp)
                 print(" 空气湿度:  "+wet)
                 #0~50优，51~100良，101~150轻度污染，151~200中度污染，201~300重度污染，>300严重污染
                 print(" 空气质量:  "+aqi+"("+aqi_level+"),PM2.5: "+aqi_pm25)
