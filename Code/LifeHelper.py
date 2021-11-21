@@ -191,17 +191,21 @@ def main():
                 umbrella=GetItem(wea_list4,"ys_des_s")
 
                 #和风天气
+                headers2 = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0'
+                }
                 qwea_url = "https://www.qweather.com/weather/"+city_en+"-"+City_code+".html"
-                qwea_html = get_weaPage(qwea_url,headers)
-                wea_comment = re.findall(r'<p class="c-city-weather-current__abstract">(.*?)</p>'\
-,qwea_html,flags=16)
+                qwea_html = get_weaPage(qwea_url,headers2)
+                #print(qwea_html)
+                wea_comment = re.findall(r'<div class="current-abstract">(.*?)</div>',qwea_html,flags=16)
                 wea_comment = "".join(wea_comment)
-                aqi_level = re.findall(r'<p class="air-chart-container__aqi-level">(.*?)</p>'\
-,qwea_html,flags=16)
+                aqi_level = re.findall(r'<p class="city-air-chart__txt text-center">(.*?)</p>',qwea_html,flags=16)
                 aqi_level=aqi_level[0].replace("\n","")
                 aqi_level=aqi_level.replace(" ","")
-                #wea_comment = wea_comment.strip('\n')
+                wea_comment = wea_comment.strip('\n')
                 wea_comment = wea_comment.replace(" ","").replace("\n","") 
+                
+                #-----------------------------------------------------
                 print("\n " + wea_comment)
                 
                 print(" ==================================")
@@ -286,9 +290,9 @@ def main():
             getnews =""
 
             for news in new_list:
-                getnews = getnews + "    " + news + ('\n')
+                getnews = getnews + "     " + news + ('\n')
 
-            print("[+] 获取新闻(来自:" + url +"):" )
+            print("\n [+] 获取新闻(来自:" + url +"):" )
             print(getnews)
 
 
