@@ -128,25 +128,15 @@ def main():
                 temp_html=get_weaPage(temp_port,headers1)
                 #print(temp_html)
                 
-                #cityDZ
                 #-----------------------------------------------------
-                html1= wea_list_all[1]
-                wea_list1= html1.split(",")
-                temp_list=temp_html.split(",")
-
-                #print(temp_list)
-                #城市英文
-                city_en = wea_list1[1]
-                city_en = GetItem(city_en,"cityname")
-                #温度区间
-                maxtemp = temp_list[3]
-                maxtemp = GetItem(maxtemp,"temp")
-
-                mintemp = temp_list[4]
-                mintemp = GetItem(mintemp,"tempn")
-                #实时天气
-                wea_now = wea_list1[4]
-                wea_now=GetItem(wea_now,"weather")
+                #温度区间:maxtemp,mintemp
+                temp_data=re.findall(r'"weatherinfo":{(.*?)}',temp_html)
+                temp_data="".join(temp_data)
+                temp_json='{'+temp_data+'}'
+                temp_json=json.loads(temp_json)
+                
+                maxtemp=temp_json['temp']
+                mintemp=temp_json['tempn']
                 
                 #alarmDZ
                 #-----------------------------------------------------
@@ -161,39 +151,40 @@ def main():
 
                 #dataSK
                 #-----------------------------------------------------
-                html3 = wea_list_all[3]
-                wea_list3= html3.split(",")
+                wea_list3=re.findall(r' dataSK ={(.*?)}',wea_list_all[3])
+                wea_list3="".join(wea_list3)
+                wea_list3='{'+wea_list3+'}'
+                wea_list3_json=json.loads(wea_list3)
+                #print(wea_list3_json)
+                
+                #城市英文
+                city_en = wea_list3_json['nameen']
                 #城市
-                cityname = wea_list3[1]
-                cityname=GetItem(cityname,"cityname")
+                cityname=wea_list3_json['cityname']
+                #实时天气
+                wea_now=wea_list3_json['weather']
                 #当前温度
-                temp_now = wea_list3[3]
-                temp_now=GetItem(temp_now,"temp")
+                temp_now=wea_list3_json['temp']
                 #湿度
-                wet = wea_list3[9]
-                wet=GetItem(wet,"SD")
+                wet=wea_list3_json['SD']
                 #时间
-                update = wea_list3[13]
-                update=GetItem(update,"time")
+                update=wea_list3_json['time']
                 #空气质量
-                aqi = wea_list3[16]
-                aqi=GetItem(aqi,"aqi")
+                aqi=wea_list3_json['aqi']
                 #PM2.5
-                aqi_pm25 = wea_list3[17]
-                aqi_pm25=GetItem(aqi_pm25,"aqi_pm25")
+                aqi_pm25=wea_list3_json['aqi_pm25']
                 #日期
-                date = wea_list3[22]
-                date=GetItem(date,"date")
+                date=wea_list3_json['date']
                 #-----------------------------------------------------
 
                 #dataZS
-                wea_list4 = wea_list_all[4]
-                #-----------------------------------------------------
-                #print(wea_list4)
-                #ataZS=re.findall(r',"(.*?)":',wea_list4)
-                #print(dataZS)
-                #-----------------------------------------------------
-                umbrella=GetItem(wea_list4,"ys_des_s")
+                wea_list4=re.findall(r'"zs":{(.*?)}',wea_list_all[4])
+                wea_list4="".join(wea_list4)
+                wea_list4='{'+wea_list4+'}'
+                wea_list4_json=json.loads(wea_list4)
+                
+                umbrella=wea_list4_json['ys_des_s']
+
 
                 #和风天气
                 headers2 = {
@@ -211,7 +202,7 @@ def main():
                 wea_comment = wea_comment.replace(" ","").replace("\n","") 
                 
                 #-----------------------------------------------------
-                print("\n " + wea_comment)
+                print('\n ' + wea_comment)
                 
                 print(" ==================================")
                 print(" 定位城市:  "+cityname)
@@ -227,6 +218,7 @@ def main():
                 if warning==1:
                     wea_alarm_all = "".join(wea_alarm_all)
                     wea_alarm = re.findall(r'"w9":"(.*?)"',wea_alarm_all)
+                    #print(wea_alarm)
                     wea_counter=len(wea_alarm)
                     if wea_counter == 1:
                         print(" [!]气象部门发布预警,请注意:")
@@ -243,7 +235,7 @@ def main():
                     else:
                         i=1
                         for alarm in wea_alarm:
-                            alarm=alarm.replace("\\","")
+                            alarm=alarm.replace("\\n","")
                             alarm=alarm.replace("：",":\n ",1)
                             if wea_counter==1:
                                 print(" "+alarm)
