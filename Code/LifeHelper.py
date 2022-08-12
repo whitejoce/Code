@@ -276,13 +276,11 @@ def main():
             html=getPage(url)
             #print(html)
             selector=etree.HTML(html)
-            i=1
-            s=selector.xpath('//*[@id="sanRoot"]/main/div[2]/div/div[2]/div[1]/div[2]/a/div[1]/text()')
             print("[+] 获取新闻(来自:" + url +"):\n" )
-            while (s):
-                print("    "+s.pop().strip())
-                i+=1
+            for i in range(1,31):
                 s=selector.xpath('//*[@id="sanRoot"]/main/div[2]/div/div[2]/div['+str(i)+']/div[2]/a/div[1]/text()')
+                temp=s.pop().strip()
+                print("    "+temp)
 
 if __name__=="__main__":
      main()
