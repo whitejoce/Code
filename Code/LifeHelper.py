@@ -11,6 +11,7 @@ import bs4
 import json
 import urllib as urlparse
 import http.client
+from lxml import etree
 import getopt
 
 headers = {
@@ -271,27 +272,17 @@ def main():
                 raise Error
 
         elif opt in ("-n", "--news"):
-            url = "https://news.sina.com.cn/china"
-            page = getPage(url)
-            #print(page)
-
-            new_list1 = re.findall(r'<div class="right-content">(.*?)</div>',page,flags=16)
-            new_list1 = "".join(new_list1)
-            new_list1 = new_list1.replace(" ","").replace("\n","")
-            new_list1 = re.findall(r'target="_blank">(.*?)</a>',new_list1)
-
-            new_list2 = re.findall(r'title="(.*?)">',page)
-
-            new_list = new_list1 + new_list2
-            #print(new_list)
-            getnews =""
-
-            for news in new_list:
-                getnews = getnews + "     " + news + ('\n')
-
-            print("\n [+] 获取新闻(来自:" + url +"):" )
-            print(getnews)
-
+            url="https://top.baidu.com/board?tab=realtime"
+            html=getPage(url)
+            #print(html)
+            selector=etree.HTML(html)
+            i=1
+            s=selector.xpath('//*[@id="sanRoot"]/main/div[2]/div/div[2]/div[1]/div[2]/a/div[1]/text()')
+            print("[+] 获取新闻(来自:" + url +"):\n" )
+            while (s):
+                print("    "+s.pop().strip())
+                i+=1
+                s=selector.xpath('//*[@id="sanRoot"]/main/div[2]/div/div[2]/div['+str(i)+']/div[2]/a/div[1]/text()')
 
 if __name__=="__main__":
      main()
