@@ -17,6 +17,7 @@ import re
 
 '''//Framework//'''
 import bs4
+from lxml import etree
 #import scrapy
 
 '''
@@ -27,6 +28,28 @@ import bs4
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0'
     }
+
+'''
+HTTP Request BEGIN
+'''
+
+def httpAsk(method,url):
+    if method=="head":
+        try:
+            response = requests.head(url)
+            print(response.headers)
+        except Exception as Error:
+            raise Error
+    elif method=="options":
+        try:
+            response = requests.options(url)
+            print(response.headers)
+        except Exception as Error:
+            raise Error
+
+'''
+END
+'''
 
 def timestamp(length):
     t = time.time()
@@ -42,12 +65,9 @@ def timestamp(length):
 
 def get_html(url,headers):
     res = requests.get(url, headers=headers)
-    ##print(res.text)
-    s=res.content
-    s.decode('ISO-8859-1')
-    bs = bs4.BeautifulSoup(s,"html.parser")
-    html = bs.prettify()
-    return html
+    bs = bs4.BeautifulSoup(res.text,"lxml")
+    #html = bs.prettify()
+    return bs
 
 def json_process(html):
     pattern = r''
@@ -72,6 +92,11 @@ if __name__ == '__main__':
         print(html)
         #container=json_process(html)
         #print(container)
+        '''
+        #XPath
+        selector = etree.HTML(html)
+        selector.xpath()
+        '''
 
     except Exception as Error:
         raise Error
