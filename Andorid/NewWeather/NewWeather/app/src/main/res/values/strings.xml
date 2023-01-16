@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="MinTemperature">最低温</string>
+    <string name="Highest_temperature">最高温</string>
+    <string name="Weather">天气</string>
+    <string name="dateString">日期</string>
+    <string name="wait">正在请求天气数据...</string>
+</resources>
