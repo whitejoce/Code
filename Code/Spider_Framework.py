@@ -94,7 +94,7 @@ if __name__ == '__main__':
         #print(container)
         '''
         #XPath
-        selector = etree.HTML(html)
+        selector = etree.HTML(html,etree.HTMLParser(encoding='utf-8'))
         selector.xpath()
         '''
 
