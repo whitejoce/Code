@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # _*_coding: utf-8 _*_
 # Coder:Whitejoce
+# Caution: 网站已更新，此代码已失效，仅供参考
+# New api: https://api.bilibili.com/x/web-interface/ranking/v2?rid=0&type=all
 
 import base64
 import time
